@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connections</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="icon" href="/assets/Connections.png" />
+  </head>
+  <body>
+    <input class="game-id">
+    <div id="loading">
+      <div class="loader">
+        <div class="icons"></div>
+      </div>
+    </div>
+    <header>
+      Header
+    </header>
+    <main>
+      <section class="choices"></section>
+      <section class="toolbar">
+        <button class="btn clear">Clear</button>
+        <button class="btn check">Check</button>
+      </section>
+    </main>
+    <footer>
+      Footer
+    </footer>
+    <script>
+      javascript:(function () { var script = document.createElement('script'); script.src="//cdn.jsdelivr.net/npm/eruda"; document.body.appendChild(script); script.onload = function () { eruda.init() } })();
+    </script>
+    <script src="/game.js"></script>
+  </body>
+</html>

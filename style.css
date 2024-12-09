@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+html, :root {
+  font-family: Montserrat, Arial, Verdana, Aptos, Calibri, system-ui, sans-serif;
+}
+
+body {
+  min-height: 100dvh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & > * {
+    width: 100%;
+  }
+}
+
+input, textarea, button {
+  font: inherit;
+  word-spacing: inherit;
+  letter-spacing: inherit;
+}
+input:not([type="button"], [type="submit"]), textarea {
+  background: transparent;
+}
+
+img {
+  display: inline-block;
+  max-width: 100%;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  /* overflow-y: auto; */
+
+  &:has( > .custom) {
+    box-sizing: border-box;
+    padding: 2rem;
+    gap: 1rem;
+  }
+}
+
+#loading {
+  position: absolute;
+  inset: 0;
+
+  background-color: white;
+
+  display: grid;
+  place-items: center;
+
+  .loader {
+    clip-path: polygon(-200% -100%, 300% -100%, 300% 200%, -200% 200%);
+  }
+  
+  .icons {
+    --size: 1.5em;
+    
+    position: relative;
+    box-sizing: border-box;
+    
+    aspect-ratio: 1;
+    height: var(--size);
+    
+    background-image: url(https://adarshrkumar.dev/assets/logo.jpg);
+    background-size: contain;
+
+    border: solid calc(var(--size) / 15) black;
+    border-radius: 50%;
+
+    font-size: 1.5rem;
+    
+    animation: loading 5s infinite linear forwards;
+
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      top: calc(-1*var(--size) / 15);
+
+      box-sizing: inherit;
+      
+      aspect-ratio: inherit;
+      height: inherit;
+  
+      background-image: inherit;
+      background-size: inherit;
+  
+      border: inherit;
+      border-radius: inherit;
+      animation: inherit;
+      animation-name: iconAnimation;
+    }
+    &::before {
+      --val: 1;
+      right: calc(100% + var(--size));  
+    }
+    &::after {
+      --val: -1;
+      left: calc(100% + var(--size));  
+    }
+  }
+}
+
+header, footer {
+  text-align: center;
+  display: none;
+}
+
+.choices {
+  --size: 4;
+  --gap: 2.5vw;
+  
+  flex: 1;
+
+  box-sizing: border-box;
+  margin-inline: auto;
+  padding: var(--gap);
+
+  width: min(100%, 750px);
+  
+  display: grid;
+  grid-template: repeat(var(--size), 1fr) / repeat(var(--size), 1fr);
+  gap: var(--gap);
+
+  .answer {
+    grid-column: span var(--size);
+    background-color: #0078d7;
+    display: grid;
+    align-items: center;
+  }
+}
+
+.toolbar {
+  --gap: 2.5vw;
+
+  box-sizing: border-box;
+  padding: var(--gap);
+  
+  display: flex;
+  justify-content: center;
+  gap: var(--gap);
+
+  .btn {
+    border-radius: 100dvw;
+  }
+}
+
+.btn, .answer {
+  padding: 0.5rem 1rem;
+  
+  border-radius: 0.5rem;
+  border-style: solid;
+  &.selected, .toolbar &:not([disabled=""]):active {
+    background-color: darkgray;
+  }
+}
+
+@keyframes loading {
+  from {
+    translate: calc(-5*(var(--size) + 1*(var(--size) / 15))) 0;
+  }
+  to {
+    translate: calc(5*(var(--size) + 1*(var(--size) / 15))) 0;
+  }
+}
+
+@keyframes iconAnimation {
+  from {
+    translate: 0 calc(100%*var(--val));
+    rotate: 0turn;
+  }
+  to {
+    translate: 0 calc(-100%*var(--val));
+    rotate: calc(var(--val)*-2turn);
+  }
+}
+
+.custom {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+
+  input {
+    border-radius: 5px;
+  }
+  + .toolbar {
+    padding: 0;    
+  }
+}
+.cat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  &:not(:first-child) {
+    padding-top: 1rem;
+    border-top: solid 0.5px black;
+  }
+  &:not(:last-child) {
+    padding-bottom: 1rem;
+    border-bottom: solid 0.5px black;
+  }
+}
+.words {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: inherit;
+}
+
+.game-id {
+  position: absolute;
+  inset: -1px;
+  height: 0px;
+  aspect-ratio: 1;
+  display: none;
+}
